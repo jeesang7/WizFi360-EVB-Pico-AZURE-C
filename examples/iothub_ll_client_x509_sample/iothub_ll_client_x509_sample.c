@@ -252,7 +252,7 @@ void iothub_ll_client_x509_sample(void)
                     // Add custom properties to message
                     //(void)IoTHubMessage_SetProperty(message_handle, "property_key", "property_value");
                     // dont use blank, special char. need encoding
-                    (void)IoTHubMessage_SetProperty(message_handle, "display_message", "Hello_RP2040_W5100S");
+                    (void)IoTHubMessage_SetProperty(message_handle, "display message", "Hello, WizFi360-EVB-Pico!");
 
                     //(void)printf("Sending message %d to IoTHub\r\n", (int)(messages_sent + 1));
                     //IoTHubDeviceClient_LL_SendEventAsync(device_ll_handle, message_handle, send_confirm_callback, NULL);

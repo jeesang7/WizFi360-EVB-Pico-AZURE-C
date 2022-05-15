@@ -83,7 +83,7 @@ If you want to modify the code that MCU-dependent and use a MCU other than **RP2
 
 If the WizFi360 Azure IoT examples are cloned, the library set as a submodule is an empty directory. Therefore, if you want to download the library set as a submodule together, clone the WizFi360 Azure IoT examples with the following Git command.
 
-```cpp
+```bash
 /* Change directory */
 // change to the directory to clone
 cd [user path]
@@ -103,7 +103,7 @@ With Visual Studio Code, each library set as a submodule is automatically patche
 
 - CMSIS-FreeRTOS
 
-```cpp
+```bash
 /* Change directory */
 // change to the 'CMSIS-FreeRTOS' library directory
 cd [user path]/RP2040-HAT-C/libraries/CMSIS-FreeRTOS
@@ -145,5 +145,5 @@ Link
 [link-port_rte]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/port/RTE
 [link-port_wizfi360]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/port/WizFi360
 [link-port_mbedtls]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/port/mbedtls
-[link-port_aws_iot_device_sdk_embedded_c]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/port/azure-iot-sdk-c
+[link-port_azure-iot-sdk-c]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/port/azure-iot-sdk-c
 [link-port_timer]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/port/timer
