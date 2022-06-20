@@ -27,7 +27,8 @@
  */
 /* SNTP */
 #define SNTP_SERVER_NAME "pool.ntp.org"
-#define TIMEZONE (1 * 60 * 60 * 9) // Korea, UTC+9
+#define SNTP_GET_TMIE_PERIOD (60 * 60 * 24) // 1 day
+#define TIMEZONE (60 * 60 * 9)              // Korea, UTC+9
 
 /**
  * ----------------------------------------------------------------------------------------------------
@@ -39,8 +40,10 @@ NetworkContext_t g_network_context;
 
 /* SNTP */
 static uint8_t g_sntp_server_ip[4] = {0, };
-static uint8_t g_sntp_get_current_timestamp_flag = 0;
 static time_t g_curr_sectime = 0;
+
+/* Timer */
+static time_t g_sec_cnt = SNTP_GET_TMIE_PERIOD;
 
 /**
  * ----------------------------------------------------------------------------------------------------
@@ -102,64 +105,83 @@ void wizchip_sntp_init(void)
 
 time_t wizchip_sntp_get_current_timestamp(void)
 {
-    int32_t retval = -1;
-    uint8_t buf[48] = {0, };
-    uint32_t timeout = 0;
+    time_t seconds = 0;
 
-    if (g_sntp_get_current_timestamp_flag == 0)
+    if (g_sec_cnt >= SNTP_GET_TMIE_PERIOD)
     {
-        /* Compose SNTP request: vers.3, mode = client */
-        memset(buf, 0, sizeof(buf));
-        buf[0] = 0x1B;
-
-        /* Create UDP socket */
-        g_network_context.socket_descriptor = iotSocketCreate(IOT_SOCKET_AF_INET, IOT_SOCKET_SOCK_DGRAM, IOT_SOCKET_IPPROTO_UDP);
-
-        if (g_network_context.socket_descriptor < 0)
+        do
         {
-            printf(" SNTP socket create failed : %d\n", g_network_context.socket_descriptor);
-        }
+            seconds = iot_socket_get_current_timestamp();
 
-        /* Set socket receive timeout: 5 seconds */
-        timeout = 5000U;
+            g_curr_sectime = seconds;
+        } while (seconds <= 0);
 
-        retval = iotSocketSetOpt(g_network_context.socket_descriptor, IOT_SOCKET_SO_RCVTIMEO, &timeout, sizeof(timeout));
-
-        if (retval < 0)
-        {
-            iotSocketClose(g_network_context.socket_descriptor);
-        }
-
-        /* Send SNTP request (port 123) */
-        retval = iotSocketSendTo(g_network_context.socket_descriptor, buf, sizeof(buf), g_sntp_server_ip, sizeof(g_sntp_server_ip), 123U);
-
-        if (retval < 0)
-        {
-            iotSocketClose(g_network_context.socket_descriptor);
-        }
-
-        /* Read SNTP response */
-        retval = iotSocketRecv(g_network_context.socket_descriptor, buf, sizeof(buf));
-
-        if (retval < 0)
-        {
-            iotSocketClose(g_network_context.socket_descriptor);
-        }
-
-        /* Extract time */
-        g_curr_sectime = ((buf[40] << 24) | (buf[41] << 16) | (buf[42] << 8) | buf[43]) - 2208988800U + TIMEZONE;
-
-        if ((retval >= 0) && (g_curr_sectime > 0))
-        {
-            g_sntp_get_current_timestamp_flag = 1;
-        }
-
-        iotSocketClose(g_network_context.socket_descriptor);
-
-        return g_curr_sectime;
+        g_sec_cnt = 0;
     }
-    else
+
+    return g_curr_sectime;
+}
+
+time_t iot_socket_get_current_timestamp(void)
+{
+    int32_t retval = -1;
+    uint8_t buf[48] = {0,};
+    uint32_t timeout = 0;
+    time_t seconds = 0;
+
+    /* Compose SNTP request: vers.3, mode = client */
+    memset(buf, 0, sizeof(buf));
+    buf[0] = 0x1B;
+
+    /* Create UDP socket */
+    g_network_context.socket_descriptor = iotSocketCreate(IOT_SOCKET_AF_INET, IOT_SOCKET_SOCK_DGRAM, IOT_SOCKET_IPPROTO_UDP);
+
+    if (g_network_context.socket_descriptor < 0)
     {
-        return g_curr_sectime;
+        printf(" SNTP socket create failed : %d\n", g_network_context.socket_descriptor);
+    }
+
+    /* Set socket receive timeout: 5 seconds */
+    timeout = 5000U;
+
+    retval = iotSocketSetOpt(g_network_context.socket_descriptor, IOT_SOCKET_SO_RCVTIMEO, &timeout, sizeof(timeout));
+
+    if (retval < 0)
+    {
+        iotSocketClose(g_network_context.socket_descriptor);
+    }
+
+    /* Send SNTP request (port 123) */
+    retval = iotSocketSendTo(g_network_context.socket_descriptor, buf, sizeof(buf), g_sntp_server_ip, sizeof(g_sntp_server_ip), 123U);
+
+    if (retval < 0)
+    {
+        iotSocketClose(g_network_context.socket_descriptor);
+    }
+
+    /* Read SNTP response */
+    retval = iotSocketRecv(g_network_context.socket_descriptor, buf, sizeof(buf));
+
+    if (retval < 0)
+    {
+        iotSocketClose(g_network_context.socket_descriptor);
+    }
+
+    /* Extract time */
+    seconds = ((buf[40] << 24) | (buf[41] << 16) | (buf[42] << 8) | buf[43]) - 2208988800U + TIMEZONE;
+
+    iotSocketClose(g_network_context.socket_descriptor);
+
+    return seconds;
+}
+
+/* Timer */
+void timer_callback(void *argument)
+{
+    g_sec_cnt++;
+
+    if (g_sec_cnt < SNTP_GET_TMIE_PERIOD)
+    {
+        g_curr_sectime++;
     }
 }

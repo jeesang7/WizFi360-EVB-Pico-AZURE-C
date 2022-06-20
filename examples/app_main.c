@@ -21,6 +21,8 @@
 
 #include "cmsis_os2.h"
 
+#include "netif.h"
+
 static const osThreadAttr_t app_main_attr = {
     .stack_size = 4096U};
 
@@ -35,6 +37,7 @@ extern int32_t demo(void);
 static void app_main(void *argument)
 {
     int32_t status;
+    osTimerId_t timer_id;
 
     printf(" Azure IoT Demo\n");
 
@@ -42,6 +45,8 @@ static void app_main(void *argument)
 
     if (status == 0)
     {
+        timer_id = osTimerNew(timer_callback, osTimerPeriodic, NULL, NULL);
+        osTimerStart(timer_id, 1000U); // start timer with delay 1 seconds
         demo();
     }
 }

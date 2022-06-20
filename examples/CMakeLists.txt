@@ -9,6 +9,7 @@ set(TARGET_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/iothub_ll_c2d_sample/iothub_ll_c2d_sample.c
     ${CMAKE_CURRENT_SOURCE_DIR}/iothub_ll_client_x509_sample/iothub_ll_client_x509_sample.c
     ${CMAKE_CURRENT_SOURCE_DIR}/iothub_ll_telemetry_sample/iothub_ll_telemetry_sample.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/prov_dev_client_ll_sample/prov_dev_client_ll_sample.c
     )
 
 add_executable(${TARGET_NAME} ${TARGET_FILES})

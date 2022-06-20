@@ -25,6 +25,7 @@
 #define APP_TELEMETRY
 //#define APP_C2D
 //#define APP_CLI_X509
+//#define APP_PROV_X509
 
 /**
  * ----------------------------------------------------------------------------------------------------
@@ -58,6 +59,9 @@ int demo(void)
 #ifdef APP_CLI_X509
     iothub_ll_client_x509_sample();
 #endif // APP_CLI_X509
+#ifdef APP_PROV_X509
+    prov_dev_client_ll_sample();
+#endif // APP_PROV_X509
 //-----------------------------------------------------------------------------------
 }
 

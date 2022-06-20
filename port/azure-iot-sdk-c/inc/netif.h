@@ -67,9 +67,27 @@ void wizchip_sntp_init(void);
  *
  * \return        status information
  *                  - \ref seconds                      : Current time get from the SNTP/NTP server is returned.
- *                  - -1                                : Operation failed
  */
 time_t wizchip_sntp_get_current_timestamp(void);
+
+/**
+ * \fn            time_t iot_socket_get_current_timestamp(void)
+ * \brief         Get current time from SNTP/NTP server.
+ *
+ * \return        status information
+ *                  - \ref seconds                      : Current time get from the SNTP/NTP server is returned,
+ *                                                        returns a negative number if an invalid time is obtained.
+ */
+time_t iot_socket_get_current_timestamp(void);
+
+/* Timer */
+/**
+ * \fn            void timer_callback(void *argument)
+ * \brief         1 second timer callback function.
+ *
+ * \return        none
+ */
+void timer_callback(void *argument);
 
 #ifdef __cplusplus
 }

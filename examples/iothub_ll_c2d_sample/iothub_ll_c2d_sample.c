@@ -150,7 +150,6 @@ void iothub_ll_c2d_sample(void)
     float telemetry_temperature;
     float telemetry_humidity;
     const char *telemetry_scale = "Celsius";
-    //const char* telemetry_msg = "test_message";
     char telemetry_msg_buffer[80];
 
     // Select the Protocol to use with the connection
@@ -228,10 +227,6 @@ void iothub_ll_c2d_sample(void)
             {
                 if (messages_sent < MESSAGE_COUNT)
                 {
-                    // // Construct the iothub message from a string or a byte array
-                    //message_handle = IoTHubMessage_CreateFromString(telemetry_msg);
-                    // //message_handle = IoTHubMessage_CreateFromByteArray((const unsigned char*)msgText, strlen(msgText)));
-
                     // Construct the iothub message
                     telemetry_temperature = 20.0f + ((float)rand() / RAND_MAX) * 15.0f;
                     telemetry_humidity = 60.0f + ((float)rand() / RAND_MAX) * 20.0f;

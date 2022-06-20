@@ -28,6 +28,10 @@ TCPSOCKETCONNECTION_HANDLE tcpsocketconnection_create(void)
     {
         printf(" TCP socket create failed : %d\n", network_context->socket_descriptor);
     }
+    else
+    {
+        printf(" TCP socket create : %d\n", network_context->socket_descriptor);
+    }
 
     return (TCPSOCKETCONNECTION_HANDLE)network_context;
 }
@@ -42,6 +46,8 @@ void tcpsocketconnection_destroy(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionH
     NetworkContext_t *network_context = (NetworkContext_t *)tcpSocketConnectionHandle;
 
     iotSocketClose(network_context->socket_descriptor);
+
+    printf(" TCP socket destroy : %d\n", network_context->socket_descriptor);
 }
 
 int tcpsocketconnection_connect(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionHandle, const char *host, const int port)
@@ -70,6 +76,8 @@ int tcpsocketconnection_connect(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionHa
         return (-1);
     }
 
+    printf(" TCP socket connect : %d\n", retval);
+
     return 0;
 }
 
@@ -97,6 +105,8 @@ void tcpsocketconnection_close(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionHan
     NetworkContext_t *network_context = (NetworkContext_t *)tcpSocketConnectionHandle;
 
     iotSocketClose(network_context->socket_descriptor);
+
+    printf(" TCP socket close : %d\n", network_context->socket_descriptor);
 }
 
 int tcpsocketconnection_send(TCPSOCKETCONNECTION_HANDLE tcpSocketConnectionHandle, const char *data, int length)
