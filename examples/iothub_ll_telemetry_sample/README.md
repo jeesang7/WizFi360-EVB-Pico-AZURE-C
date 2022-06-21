@@ -4,7 +4,7 @@
 
 ## Step 1: Prepare software
 
-The following serial terminal program and graphical tool for interacting with devices connected to your IoT hub are required for iothub_ll_telemetry_sample test, download and install from below link.
+The following serial terminal program and graphical tool for interacting with devices connected to your Azure IoT are required for iothub_ll_telemetry_sample test, download and install from below link.
 
 - [**Tera Term**][link-tera_term]
 - [**Azure IoT Explorer**][link-azure_iot_explorer]
@@ -55,6 +55,8 @@ For iothub_ll_telemetry_sample, uncomment APP_TELEMETRY and comment the rest of 
 #define APP_TELEMETRY
 //#define APP_C2D
 //#define APP_CLI_X509
+//#define APP_PROV_X509
+
 ```
 
 3. Setup device connection string.
@@ -93,7 +95,7 @@ const char pico_az_connectionString[] = "[device connection string]";
 
 1. Reset your board.
 
-2. If the iothub_ll_telemetry_sample works normally on WizFi360-EVB-Pico, you can see the Wi-Fi connection log, connecting to the Azure IoT and sending the message.
+2. If the iothub_ll_telemetry_sample works normally on WizFi360-EVB-Pico, you can see the Wi-Fi connection log, connecting to the Azure IoT Hub and sending the message.
 
 
 

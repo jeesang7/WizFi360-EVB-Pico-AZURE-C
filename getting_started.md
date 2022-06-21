@@ -41,7 +41,7 @@ Examples are available at '**WizFi360-EVB-Pico-AZURE-C/examples/**' directory. A
 - [**iothub_ll_telemetry_sample**][link-iothub_ll_telemetry_sample]
 - [**iothub_ll_c2d_sample**][link-iothub_ll_c2d_sample]
 - [**iothub_ll_client_x509_sample**][link-iothub_ll_client_x509_sample]
-- **prov_dev_client_ll_sample** : To be update later
+- [**prov_dev_client_ll_sample**][link-prov_dev_client_ll_sample]
 
 Note that **CMSIS_5**, **CMSIS-Driver**, **CMSIS-FreeRTOS**, **mbedtls**, **azure-iot-sdk-c**, **pico-sdk** are needed to run WizFi360 Azure IoT examples.
 
@@ -133,6 +133,7 @@ Link
 [link-iothub_ll_telemetry_sample]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/examples/iothub_ll_telemetry_sample
 [link-iothub_ll_c2d_sample]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/examples/iothub_ll_c2d_sample
 [link-iothub_ll_client_x509_sample]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/examples/iothub_ll_client_x509_sample
+[link-prov_dev_client_ll_sample]: https://github.com/Wiznet/WizFi360-EVB-Pico-AZURE-C/tree/main/examples/prov_dev_client_ll_sample
 [link-cmsis_5]: https://github.com/ARM-software/CMSIS_5
 [link-cmsis-driver]: https://github.com/ARM-software/CMSIS-Driver
 [link-cmsis-freertos]: https://github.com/ARM-software/CMSIS-FreeRTOS

@@ -4,7 +4,7 @@
 
 ## Step 1: Prepare software
 
-The following serial terminal program and graphical tool for interacting with devices connected to your IoT hub are required for iothub_ll_c2d_sample test, download and install from below link.
+The following serial terminal program and graphical tool for interacting with devices connected to your Azure IoT are required for iothub_ll_c2d_sample test, download and install from below link.
 
 - [**Tera Term**][link-tera_term]
 - [**Azure IoT Explorer**][link-azure_iot_explorer]
@@ -21,7 +21,7 @@ The following serial terminal program and graphical tool for interacting with de
 
 Configure Azure IoT in the Azure Portal.
 
-As Azure IoT, Azure IoT hub is used.
+As Azure IoT, Azure IoT Hub is used.
 
 Refer to the guide documents below to setup Azure IoT Hub and create a device in Azure IoT Hub.
 
@@ -55,6 +55,7 @@ For iothub_ll_c2d_sample, uncomment APP_C2D and comment the rest of the defined 
 //#define APP_TELEMETRY
 #define APP_C2D
 //#define APP_CLI_X509
+//#define APP_PROV_X509
 ```
 
 3. Setup device connection string.
@@ -93,7 +94,7 @@ const char pico_az_connectionString[] = "[device connection string]";
 
 1. Reset your board.
 
-2. If the iothub_ll_c2d_sample works normally on WizFi360-EVB-Pico, you can see the Wi-Fi connection log, connecting to the Azure IoT and sending the message.
+2. If the iothub_ll_c2d_sample works normally on WizFi360-EVB-Pico, you can see the Wi-Fi connection log, connecting to the Azure IoT Hub and sending the message.
 
 3. If you send the message using the Cloud-to-device message function of Azure IoT Explorer, you can see that the WizFi360-EVB-Pico receive the message.
 

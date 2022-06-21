@@ -30,7 +30,7 @@ Since self-signed certificates in X.509 format are required, create self-signed 
 
 Configure Azure IoT in the Azure Portal.
 
-As Azure IoT, Azure IoT hub is used.
+As Azure IoT, Azure IoT Hub is used.
 
 To setup Azure IoT Hub and create a device in Azure IoT Hub, refer to the documents below.
 
@@ -62,6 +62,7 @@ For iothub_ll_client_x509_sample, uncomment APP_CLI_X509 and comment the rest of
 //#define APP_TELEMETRY
 //#define APP_C2D
 #define APP_CLI_X509
+//#define APP_PROV_X509
 ```
 
 3. Setup device connection string, certificate and key.
@@ -78,7 +79,7 @@ HostName=[host name];DeviceId=[device id];x509=true
 HostName=my-rp2040-hub.azure-devices.net;DeviceId=my-rp2040-device-cli-x509;x509=true
 ```
 
-Connection string, client certificate and private key can be set in 'sample_certs.c' in 'WizFi360-EVB-Pico-AWS-C/examples/' directory.
+Connection string, client certificate and private key can be set in 'sample_certs.c' in 'WizFi360-EVB-Pico-AZURE-C/examples/' directory.
 
 ```cpp
 const char pico_az_x509connectionString[] = "[device connection string]";
@@ -116,7 +117,7 @@ const char pico_az_x509privatekey[] =
 
 1. Reset your board.
 
-2. If the iothub_ll_client_x509_sample works normally on WizFi360-EVB-Pico, you can see the Wi-Fi connection log, connecting to the Azure IoT and sending the message.
+2. If the iothub_ll_client_x509_sample works normally on WizFi360-EVB-Pico, you can see the Wi-Fi connection log, connecting to the Azure IoT Hub and sending the message.
 
 
 
