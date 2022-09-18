@@ -33,7 +33,12 @@ target_link_libraries(${TARGET_NAME} PRIVATE
         TIMER_FILES		
         )
 
-pico_enable_stdio_usb(${TARGET_NAME} 1)
-pico_enable_stdio_uart(${TARGET_NAME} 0)
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+    pico_enable_stdio_usb(${TARGET_NAME} 1)
+    pico_enable_stdio_uart(${TARGET_NAME} 0)
+    message("Using release build (set pico_enable_stdio_usb to printf)")
+else()
+    message("Using debug build (unset pico_enable_stdio_usb for picoprobe debugging)")
+endif()
 
 pico_add_extra_outputs(${TARGET_NAME})
