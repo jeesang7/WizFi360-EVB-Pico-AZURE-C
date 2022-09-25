@@ -22,10 +22,11 @@
  */
 // The application you wish to use should be uncommented
 //
-#define APP_TELEMETRY
+// #define APP_TELEMETRY
 //#define APP_C2D
 //#define APP_CLI_X509
 //#define APP_PROV_X509
+#define MEDICBOX
 
 /**
  * ----------------------------------------------------------------------------------------------------
@@ -62,6 +63,9 @@ int demo(void)
 #ifdef APP_PROV_X509
     prov_dev_client_ll_sample();
 #endif // APP_PROV_X509
+#ifdef MEDICBOX
+    medicbox();
+#endif // MEDICBOX
 //-----------------------------------------------------------------------------------
 }
 
