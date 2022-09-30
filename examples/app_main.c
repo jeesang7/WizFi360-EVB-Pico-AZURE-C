@@ -29,6 +29,8 @@ static const osThreadAttr_t app_main_attr = {
 void app_initialize(void);
 
 extern int32_t socket_startup(void);
+extern int32_t socket_startup_serial(void);
+extern int32_t socket_startup_ap(void);
 extern int32_t demo(void);
 
 /*-----------------------------------------------------------------------------
@@ -41,7 +43,8 @@ static void app_main(void *argument)
 
     printf(" Azure IoT Demo\n");
 
-    status = socket_startup();
+    // status = socket_startup();
+    status = socket_startup_serial();
 
     if (status == 0)
     {

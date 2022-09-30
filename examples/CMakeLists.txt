@@ -5,6 +5,7 @@ set(TARGET_FILES
     iot_demo.c
     sample_certs.c
     socket_startup.c
+    serial.c
     ${CMAKE_CURRENT_SOURCE_DIR}/custom_hsm_example/custom_hsm_x509.c
     ${CMAKE_CURRENT_SOURCE_DIR}/iothub_ll_c2d_sample/iothub_ll_c2d_sample.c
     ${CMAKE_CURRENT_SOURCE_DIR}/iothub_ll_client_x509_sample/iothub_ll_client_x509_sample.c

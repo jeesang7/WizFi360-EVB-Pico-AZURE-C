@@ -53,12 +53,14 @@ and removing calls to _DoWork will yield the same results. */
 
 /* Paste in the your iothub connection string  */
 //static const char* connectionString = "[device connection string]";
-static const char *connectionString = pico_az_connectionString;
+// static const char *connectionString = pico_az_connectionString;
 
 #define MESSAGE_COUNT 3
 static bool g_continueRunning = true;
 static size_t g_message_count_send_confirmations = 0;
 static size_t g_message_recv_count = 0;
+
+extern char* serial_read_string(void);
 
 static void send_confirm_callback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userContextCallback)
 {
@@ -175,6 +177,8 @@ void medicbox(void)
 
     (void)printf("Hello, MedicBox !!\r\n");
     (void)printf("Creating IoTHub Device handle\r\n");
+    (void)printf("Input the Connection String: ");
+    char *connectionString = serial_read_string();
     // Create the iothub handle here
     device_ll_handle = IoTHubDeviceClient_LL_CreateFromConnectionString(connectionString, protocol);
     if (device_ll_handle == NULL)
@@ -194,7 +198,7 @@ void medicbox(void)
 #ifdef SET_TRUSTED_CERT_IN_SAMPLES
         // Setting the Trusted Certificate. This is only necessary on systems without
         // built in certificate stores.
-        IoTHubDeviceClient_LL_SetOption(device_ll_handle, OPTION_TRUSTED_CERT, certificates);
+        // IoTHubDeviceClient_LL_SetOption(device_ll_handle, OPTION_TRUSTED_CERT, certificates);
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
 
 #if defined SAMPLE_MQTT || defined SAMPLE_MQTT_OVER_WEBSOCKETS
